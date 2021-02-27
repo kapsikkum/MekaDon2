@@ -2,12 +2,16 @@
 # @Author: kapsikkum
 # @Date:   2021-02-25 01:28:13
 # @Last Modified by:   kapsikkum
-# @Last Modified time: 2021-02-25 02:53:29
+# @Last Modified time: 2021-02-26 22:37:51
+
+
 import yaml
 import os
 from core import bot
+from core.events import init_events
 
-print(os.listdir())
-config = yaml.load(open("./mecha/config.yml").read(), Loader=yaml.FullLoader)
-print(config)
+config = yaml.load(open("config.yml").read(), Loader=yaml.FullLoader)
+
+init_events(bot)
+
 bot.run(config["token"])
