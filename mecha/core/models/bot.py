@@ -2,14 +2,14 @@
 # @Author: kapsikkum
 # @Date:   2021-02-27 15:07:03
 # @Last Modified by:   kapsikkum
-# @Last Modified time: 2021-04-02 13:35:49
+# @Last Modified time: 2021-04-02 14:08:17
 
 
 import asyncio
 import logging
 
 import discord
-from core.events import init_events
+from mecha.core.events import init_events
 from discord.ext import commands
 
 from ..utils import get_version, load_extensions

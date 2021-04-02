@@ -2,7 +2,7 @@
 # @Author: kapsikkum
 # @Date:   2021-02-25 03:01:41
 # @Last Modified by:   kapsikkum
-# @Last Modified time: 2021-04-02 13:20:01
+# @Last Modified time: 2021-04-02 14:07:59
 
 
 import asyncio
@@ -23,16 +23,17 @@ def get_version():
 
 def load_extensions(bot):
     log.debug("Start loading extensions")
-    for file in os.listdir("core/extensions"):
+    for file in os.listdir("mecha/core/extensions"):
         if file.endswith(".py") and file != "__init__.py":
             try:
-                bot.load_extension("core.extensions.%s" % file.replace(".py", ""))
+                bot.load_extension("mecha.core.extensions.%s" % file.replace(".py", ""))
                 log.info(
-                    "Loaded extension 'core.extensions.%s'" % file.replace(".py", "")
+                    "Loaded extension 'mecha.core.extensions.%s'"
+                    % file.replace(".py", "")
                 )
             except Exception as e:
                 log.error(
-                    "Unable to load extension 'core.extensions.%s', Exception: %s"
+                    "Unable to load extension 'mecha.core.extensions.%s', Exception: %s"
                     % (file.replace(".py", ""), e)
                 )
     log.debug("Finished loading extensions")
