@@ -2,7 +2,7 @@
 # @Author: kapsikkum
 # @Date:   2021-02-27 15:07:03
 # @Last Modified by:   kapsikkum
-# @Last Modified time: 2021-04-02 09:09:22
+# @Last Modified time: 2021-04-02 13:35:49
 
 
 import asyncio
@@ -28,7 +28,7 @@ class Bot(commands.AutoShardedBot):
         self.engine = None
         super().__init__(
             command_prefix=self.get_prefix,
-            help_command=None,
+            # help_command=None,
             intents=discord.Intents(
                 messages=True, guilds=True, members=True, presences=True
             ),
