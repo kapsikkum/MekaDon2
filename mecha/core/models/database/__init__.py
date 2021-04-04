@@ -2,12 +2,11 @@
 # @Author: kapsikkum
 # @Date:   2021-02-28 16:19:51
 # @Last Modified by:   kapsikkum
-# @Last Modified time: 2021-04-02 06:51:27
+# @Last Modified time: 2021-04-04 03:36:09
 
-import sqlalchemy as db
+import motor.motor_asyncio
 
-metadata = db.MetaData()
-
+client = motor.motor_asyncio.AsyncIOMotorClient()
 
 from .user import User
 from .tag import Tag

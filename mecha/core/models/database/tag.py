@@ -1,30 +1,30 @@
 # @Author: kapsikkum
 # @Date:   2021-04-02 05:40:13
 # @Last Modified by:   kapsikkum
-# @Last Modified time: 2021-04-02 07:21:03
+# @Last Modified time: 2021-04-04 05:41:26
 
 import sqlalchemy as db
 
-from . import metadata
+from sqlalchemy.schema import CreateTable
 
 
 class Tag:
-    table = db.Table(
-        "tags",
-        metadata,
-        db.Column("id", db.Integer, primary_key=True),
-        db.Column("content", db.String(2000), nullable=False),
-        db.Column("owner", db.Integer, nullable=False),
-        db.Column("created_at", db.DateTime, nullable=False),
-    )
+    # table = db.Table(
+    #     "tags",
+    #     metadata,
+    #     db.Column("id", db.Integer, primary_key=True),
+    #     db.Column("content", db.String(2000), nullable=False),
+    #     db.Column("owner", db.BigInteger, db.ForeignKey("users.id"), nullable=False),
+    #     db.Column("created_at", db.DateTime, nullable=False),
+    # )
 
-    @classmethod
-    async def create_table(self, engine):
-        async with engine.acquire() as conn:
-            await conn.execute("DROP TABLE IF EXISTS tags")
-            await conn.execute(
-                """CREATE TABLE IF NOT EXISTS tags (id BIGINT PRIMARY KEY, content VARCHAR(2000), owner INT, created_at DATETIME)"""
-            )
+    # @classmethod
+    # async def create_table(self, engine):
+    #     async with engine.acquire() as conn:
+    #         await conn.execute(
+    #             "SET FOREIGN_KEY_CHECKS=0; DROP TABLE IF EXISTS tags; SET FOREIGN_KEY_CHECKS=1;"
+    #         )  # Remove
+    #         await conn.execute(CreateTable(self.table))
 
     def __init__(self, id, content, owner, created_at):
         self.id = id
