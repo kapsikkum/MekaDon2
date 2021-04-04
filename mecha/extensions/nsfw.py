@@ -1,7 +1,7 @@
 # @Author: kapsikkum
 # @Date:   2021-04-02 13:13:49
 # @Last Modified by:   kapsikkum
-# @Last Modified time: 2021-04-04 07:57:36
+# @Last Modified time: 2021-04-04 10:36:11
 # TODO optimize a bit more!
 
 import logging
@@ -274,6 +274,9 @@ class Cog(commands.Cog, name="NSFW Commands"):
             "https://rule34.xxx",
             True,
         )
+        self.xbooru = GelbooruClient(
+            bot, "https://xbooru.com/index.php", "https://xbooru.com", True
+        )
 
     @commands.command(
         description="Get a random image from a specified tag from DanBooru. (NSFW)",
@@ -366,6 +369,19 @@ class Cog(commands.Cog, name="NSFW Commands"):
     async def _rule34(self, ctx, *, tags=""):
         async with ctx.typing():
             posts = await self.rule34.get_posts(tags)
+            embed = construct_post_embed(tags, posts)
+        await ctx.reply(embed=embed, mention_author=False)
+
+    @commands.command(
+        description="Get a random image from a specified tag from XBooru. (NSFW)",
+        usage="{prefix}xbooru <tags>",
+        name="xbooru",
+    )
+    @commands.is_nsfw()
+    @commands.cooldown(5, 10, commands.BucketType.user)
+    async def _xbooru(self, ctx, *, tags=""):
+        async with ctx.typing():
+            posts = await self.xbooru.get_posts(tags)
             embed = construct_post_embed(tags, posts)
         await ctx.reply(embed=embed, mention_author=False)
 
