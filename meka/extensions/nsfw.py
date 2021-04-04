@@ -1,7 +1,7 @@
 # @Author: kapsikkum
 # @Date:   2021-04-02 13:13:49
 # @Last Modified by:   kapsikkum
-# @Last Modified time: 2021-04-04 10:36:11
+# @Last Modified time: 2021-04-04 13:15:13
 # TODO optimize a bit more!
 
 import logging
@@ -277,10 +277,13 @@ class Cog(commands.Cog, name="NSFW Commands"):
         self.xbooru = GelbooruClient(
             bot, "https://xbooru.com/index.php", "https://xbooru.com", True
         )
+        self.yandere = DanbooruClient(
+            bot, "https://yande.re/post.json", "https://yande.re/post/show/{id}"
+        )
 
     @commands.command(
         description="Get a random image from a specified tag from DanBooru. (NSFW)",
-        usage="{prefix}danbooru <tags>",
+        usage="<tags>",
         name="danbooru",
     )
     @commands.is_nsfw()
@@ -295,7 +298,7 @@ class Cog(commands.Cog, name="NSFW Commands"):
 
     @commands.command(
         description="Get a random image from a specified tag from e621. (NSFW, Furry site)",
-        usage="{prefix}e621 <tags>",
+        usage="<tags>",
         name="e621",
     )
     @commands.is_nsfw()
@@ -308,7 +311,7 @@ class Cog(commands.Cog, name="NSFW Commands"):
 
     @commands.command(
         description="Get a random image from a specified tag from GelBooru. (NSFW)",
-        usage="{prefix}gelbooru <tags>",
+        usage="<tags>",
         name="gelbooru",
     )
     @commands.is_nsfw()
@@ -321,7 +324,7 @@ class Cog(commands.Cog, name="NSFW Commands"):
 
     @commands.command(
         description="Get a random image from a specified tag from HypnoHub. (NSFW Hypno fetish site)",
-        usage="{prefix}hypnohub <tags>",
+        usage="<tags>",
         name="hypnohub",
     )
     @commands.is_nsfw()
@@ -334,7 +337,7 @@ class Cog(commands.Cog, name="NSFW Commands"):
 
     @commands.command(
         description="Get a random image from a specified tag from KonaChan. (NSFW)",
-        usage="{prefix}konachan <tags>",
+        usage="<tags>",
         name="konachan",
     )
     @commands.is_nsfw()
@@ -347,7 +350,7 @@ class Cog(commands.Cog, name="NSFW Commands"):
 
     @commands.command(
         description="Get a random image from a specified tag from RealBooru. (NSFW)",
-        usage="{prefix}realbooru <tags>",
+        usage="<tags>",
         name="realbooru",
     )
     @commands.is_nsfw()
@@ -360,7 +363,7 @@ class Cog(commands.Cog, name="NSFW Commands"):
 
     @commands.command(
         description="Get a random image from a specified tag from Rule34. (NSFW)",
-        usage="{prefix}rule34 <tags>",
+        usage="<tags>",
         name="rule34",
         aliases=["r34"],
     )
@@ -374,7 +377,7 @@ class Cog(commands.Cog, name="NSFW Commands"):
 
     @commands.command(
         description="Get a random image from a specified tag from XBooru. (NSFW)",
-        usage="{prefix}xbooru <tags>",
+        usage="<tags>",
         name="xbooru",
     )
     @commands.is_nsfw()
@@ -382,6 +385,19 @@ class Cog(commands.Cog, name="NSFW Commands"):
     async def _xbooru(self, ctx, *, tags=""):
         async with ctx.typing():
             posts = await self.xbooru.get_posts(tags)
+            embed = construct_post_embed(tags, posts)
+        await ctx.reply(embed=embed, mention_author=False)
+
+    @commands.command(
+        description="Get a random image from a specified tag from Yande.re. (NSFW)",
+        usage="<tags>",
+        name="yandere",
+    )
+    @commands.is_nsfw()
+    @commands.cooldown(5, 10, commands.BucketType.user)
+    async def _yandere(self, ctx, *, tags=""):
+        async with ctx.typing():
+            posts = await self.yandere.get_posts(tags)
             embed = construct_post_embed(tags, posts)
         await ctx.reply(embed=embed, mention_author=False)
 
