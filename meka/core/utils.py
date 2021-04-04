@@ -2,7 +2,7 @@
 # @Author: kapsikkum
 # @Date:   2021-02-25 03:01:41
 # @Last Modified by:   kapsikkum
-# @Last Modified time: 2021-04-04 07:51:16
+# @Last Modified time: 2021-04-04 12:38:56
 
 
 import asyncio
@@ -26,9 +26,9 @@ def get_version():
 
 def get_extensions():
     e = list()
-    for file in os.listdir("mecha/extensions"):
+    for file in os.listdir("meka/extensions"):
         if file.endswith(".py") and file != "__init__.py":
-            e.append("mecha.extensions.%s" % file.replace(".py", ""))
+            e.append("meka.extensions.%s" % file.replace(".py", ""))
     return e
 
 

@@ -11,8 +11,8 @@ import logging
 import discord
 import motor.motor_asyncio
 from discord.ext import commands
-from mecha.core.events import init_events
-from mecha.core.utils import get_extensions, get_version
+from meka.core.events import init_events
+from meka.core.utils import get_extensions, get_version
 
 log = logging.getLogger(__name__)
 
@@ -33,7 +33,7 @@ class Bot(commands.AutoShardedBot):
             intents=discord.Intents(
                 messages=True, guilds=True, members=True, presences=True
             ),
-            description=f"MechaCore ({get_version()})",
+            description=f"MekaCore ({get_version()})",
             **options,
         )
 
@@ -55,7 +55,7 @@ class Bot(commands.AutoShardedBot):
     def load_extensions(self):
         log.debug("Start loading extensions")
         extensions = get_extensions()
-        extensions.insert(0, "mecha.core.commands")
+        extensions.insert(0, "meka.core.commands")
         for ext in extensions:
             try:
                 self.load_extension(ext)
@@ -72,7 +72,7 @@ class Bot(commands.AutoShardedBot):
     def reload_extensions(self):
         log.debug("Reloading all extensions")
         extensions = get_extensions()
-        extensions.insert(0, "mecha.core.commands")
+        extensions.insert(0, "meka.core.commands")
         for ext in extensions:
             try:
                 if ext in self.loaded_extensions:
@@ -90,7 +90,7 @@ class Bot(commands.AutoShardedBot):
         log.debug("Finished reloading extensions")
 
     def run(self, *args, **kwargs):
-        log.info("Starting Mecha...")
+        log.info("Starting Meka...")
         init_events(self)
         self.load_extensions()
         return super().run(*args, **kwargs)

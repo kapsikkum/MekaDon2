@@ -11,8 +11,8 @@ import aiohttp
 import discord
 from discord.ext import commands
 
-from mecha.core import BooruPost, Cache
-from mecha.core.utils import construct_post_embed
+from meka.core import BooruPost, Cache
+from meka.core.utils import construct_post_embed
 
 log = logging.getLogger(__name__)
 

@@ -5,6 +5,6 @@ RUN apt install python3-dev
 
 RUN pip install -r requirements.txt
 
-COPY . /opt/mecha
+COPY . /opt/meka
 
 ENTRYPOINT ["python run.py"]

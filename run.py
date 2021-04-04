@@ -11,10 +11,10 @@ import sys
 
 import yaml
 
-from mecha.core import bot
-from mecha.core.events import init_events
+from meka.core import bot
+from meka.core.events import init_events
 
-logger = logging.getLogger("mecha")
+logger = logging.getLogger("meka")
 logger.setLevel(logging.DEBUG)
 handler = logging.StreamHandler(sys.stdout)
 handler.setLevel(logging.DEBUG)

@@ -20,12 +20,12 @@ log = logging.getLogger(__name__)
 def init_events(bot):
     @bot.event
     async def on_ready():
-        log.info("Mecha has started!")
+        log.info("Meka has started!")
         log.info("Version %s" % get_version())
         log.info("Bot Guilds: %s" % len(bot.guilds))
         log.info("Bot Users: %s" % len(list([x for x in bot.get_all_members()])))
         # print(
-        #     f"Mecha is working.\nVersion: {get_version()}\nGuilds: {len(bot.guilds)}\nUsers: {len(list([x for x in bot.get_all_members()]))}"
+        #     f"Meka is working.\nVersion: {get_version()}\nGuilds: {len(bot.guilds)}\nUsers: {len(list([x for x in bot.get_all_members()]))}"
         # )
         # bot.engine = await create_engine(
         #     user="root",
