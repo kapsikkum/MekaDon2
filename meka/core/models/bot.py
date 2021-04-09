@@ -2,10 +2,11 @@
 # @Author: kapsikkum
 # @Date:   2021-02-27 15:07:03
 # @Last Modified by:   kapsikkum
-# @Last Modified time: 2021-04-04 03:58:36
+# @Last Modified time: 2021-04-09 13:47:45
 
 
 import asyncio
+import datetime
 import logging
 
 import discord
@@ -23,16 +24,13 @@ class Bot(commands.AutoShardedBot):
     """
 
     # yeah
-    uptime = None
     loaded_extensions = list()
 
     def __init__(self, **options):
         super().__init__(
             command_prefix=self.get_prefix,
             # help_command=None,
-            intents=discord.Intents(
-                messages=True, guilds=True, members=True, presences=True
-            ),
+            intents=discord.Intents.all(),  # (messages=True, guilds=True, members=True, presences=True)
             description=f"MekaCore ({get_version()})",
             **options,
         )
@@ -40,6 +38,11 @@ class Bot(commands.AutoShardedBot):
         # Database shit
         self._client = motor.motor_asyncio.AsyncIOMotorClient()
         self.db = self._client.meka
+
+        # Uptime
+        self.uptime = datetime.datetime.utcnow()
+        self.reconnected = False
+        self.last_disconnect = None
 
     async def get_prefix(self, message):
         return commands.when_mentioned_or("-")(self, message)
@@ -89,8 +92,33 @@ class Bot(commands.AutoShardedBot):
                 self.loaded_extensions.append(ext)
         log.debug("Finished reloading extensions")
 
+    async def on_connect(self):
+        self.reconnected = True
+
+    async def on_disconnect(self):
+        if self.reconnected:
+            self.reconnected = False
+            self.last_disconnect = datetime.datetime.utcnow()
+
+    def total_downtime(self):
+        if self.last_disconnect is None:
+            return 0.0
+
+        return (datetime.datetime.utcnow() - self.last_disconnect).total_seconds()
+
+    # Commands
+    async def on_ready(self):
+        log.info("Meka has started!")
+        log.info("Version %s" % get_version())
+        log.info("Bot Guilds: %s" % len(self.guilds))
+        log.info("Bot Users: %s" % len(list([x for x in self.get_all_members()])))
+
+    async def on_message(self, message):
+        await self.process_commands(message)
+
+    # run
     def run(self, *args, **kwargs):
         log.info("Starting Meka...")
-        init_events(self)
+        # init_events(self)
         self.load_extensions()
         return super().run(*args, **kwargs)

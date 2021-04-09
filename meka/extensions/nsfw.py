@@ -1,7 +1,7 @@
 # @Author: kapsikkum
 # @Date:   2021-04-02 13:13:49
 # @Last Modified by:   kapsikkum
-# @Last Modified time: 2021-04-04 13:15:13
+# @Last Modified time: 2021-04-09 13:58:24
 # TODO optimize a bit more!
 
 import logging
@@ -282,7 +282,7 @@ class Cog(commands.Cog, name="NSFW Commands"):
         )
 
     @commands.command(
-        description="Get a random image from a specified tag from DanBooru. (NSFW)",
+        description="Get a random image with a specified tag from DanBooru. (NSFW)",
         usage="<tags>",
         name="danbooru",
     )
@@ -297,7 +297,7 @@ class Cog(commands.Cog, name="NSFW Commands"):
         await ctx.reply(embed=embed, mention_author=False)
 
     @commands.command(
-        description="Get a random image from a specified tag from e621. (NSFW, Furry site)",
+        description="Get a random image with a specified tag from e621. (NSFW, Furry site)",
         usage="<tags>",
         name="e621",
     )
@@ -310,7 +310,7 @@ class Cog(commands.Cog, name="NSFW Commands"):
         await ctx.reply(embed=embed, mention_author=False)
 
     @commands.command(
-        description="Get a random image from a specified tag from GelBooru. (NSFW)",
+        description="Get a random image with a specified tag from GelBooru. (NSFW)",
         usage="<tags>",
         name="gelbooru",
     )
@@ -323,7 +323,7 @@ class Cog(commands.Cog, name="NSFW Commands"):
         await ctx.reply(embed=embed, mention_author=False)
 
     @commands.command(
-        description="Get a random image from a specified tag from HypnoHub. (NSFW Hypno fetish site)",
+        description="Get a random image with a specified tag from HypnoHub. (NSFW Hypno fetish site)",
         usage="<tags>",
         name="hypnohub",
     )
@@ -336,7 +336,7 @@ class Cog(commands.Cog, name="NSFW Commands"):
         await ctx.reply(embed=embed, mention_author=False)
 
     @commands.command(
-        description="Get a random image from a specified tag from KonaChan. (NSFW)",
+        description="Get a random image with a specified tag from KonaChan. (NSFW)",
         usage="<tags>",
         name="konachan",
     )
@@ -349,7 +349,7 @@ class Cog(commands.Cog, name="NSFW Commands"):
         await ctx.reply(embed=embed, mention_author=False)
 
     @commands.command(
-        description="Get a random image from a specified tag from RealBooru. (NSFW)",
+        description="Get a random image with a specified tag from RealBooru. (NSFW)",
         usage="<tags>",
         name="realbooru",
     )
@@ -362,7 +362,7 @@ class Cog(commands.Cog, name="NSFW Commands"):
         await ctx.reply(embed=embed, mention_author=False)
 
     @commands.command(
-        description="Get a random image from a specified tag from Rule34. (NSFW)",
+        description="Get a random image with a specified tag from Rule34. (NSFW)",
         usage="<tags>",
         name="rule34",
         aliases=["r34"],
@@ -376,7 +376,7 @@ class Cog(commands.Cog, name="NSFW Commands"):
         await ctx.reply(embed=embed, mention_author=False)
 
     @commands.command(
-        description="Get a random image from a specified tag from XBooru. (NSFW)",
+        description="Get a random image with a specified tag from XBooru. (NSFW)",
         usage="<tags>",
         name="xbooru",
     )
@@ -389,7 +389,7 @@ class Cog(commands.Cog, name="NSFW Commands"):
         await ctx.reply(embed=embed, mention_author=False)
 
     @commands.command(
-        description="Get a random image from a specified tag from Yande.re. (NSFW)",
+        description="Get a random image with a specified tag from Yande.re. (NSFW)",
         usage="<tags>",
         name="yandere",
     )

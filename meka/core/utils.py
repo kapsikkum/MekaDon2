@@ -2,7 +2,7 @@
 # @Author: kapsikkum
 # @Date:   2021-02-25 03:01:41
 # @Last Modified by:   kapsikkum
-# @Last Modified time: 2021-04-04 12:38:56
+# @Last Modified time: 2021-04-09 06:07:15
 
 
 import asyncio
@@ -48,6 +48,18 @@ def construct_post_embed(tag, posts, desc=discord.Embed.Empty):
         )
         embed.set_image(url=post.file_url)
     return embed
+
+
+def construct_extension_embed(bot, text="Currently Loaded Extensions"):
+    ext = "```\n"
+    for e in bot.loaded_extensions:
+        ext += e + "\n"
+    ext += "\n```"
+    return discord.Embed(
+        title=text,
+        description=ext,
+        color=0xFF0000,
+    )
 
 
 class Cache:
