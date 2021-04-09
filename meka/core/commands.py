@@ -1,10 +1,12 @@
 # @Author: kapsikkum
 # @Date:   2021-04-02 07:35:02
 # @Last Modified by:   kapsikkum
-# @Last Modified time: 2021-04-03 06:59:50
+# @Last Modified time: 2021-04-09 14:02:29
+
 
 import discord
 from discord.ext import commands
+from meka.core.utils import construct_extension_embed
 
 
 class Basic(
@@ -18,40 +20,55 @@ class Basic(
     async def ping(self, ctx):
         await ctx.reply(f"**{int(self.bot.latency * 1000)} ms**", mention_author=False)
 
-    @commands.command(description="Shows Currently Loaded Extensions.", hidden=True)
+
+class Admin(
+    commands.Cog, name="Admin Commands", description="Commands for moderation etc."
+):
+    pass
+
+
+class Owner(commands.Cog, name="Owner Commands"):
+    def __init__(self, bot):
+        self.bot = bot
+
+    @commands.group(
+        description="Commands for interacting with the bots loaded extensions.",
+        aliases=["ext", "exts"],
+        hidden=True,
+        invoke_without_command=True,
+    )
     @commands.is_owner()
     async def extensions(self, ctx):
-        ext = "```\n"
-        for e in self.bot.loaded_extensions:
-            ext += e + "\n"
-        ext += "\n```"
         await ctx.reply(
-            embed=discord.Embed(
-                title="Currently Loaded Extensions",
-                description=ext,
-                color=0xFF0000,
-            ),
+            embed=construct_extension_embed(self.bot),
             mention_author=False,
         )
 
-    @commands.command(description="Reload", hidden=True)
+    @extensions.group(
+        description="Reload the currently loaded extensions (And any that are found).",
+        aliases=["r", "rel"],
+        invoke_without_command=True,
+    )
     @commands.is_owner()
     async def reload(self, ctx):
         self.bot.reload_extensions()
-
-        ext = "```\n"
-        for e in self.bot.loaded_extensions:
-            ext += e + "\n"
-        ext += "\n```"
         await ctx.reply(
-            embed=discord.Embed(
-                title="Currently Loaded Extensions",
-                description=ext,
-                color=0xFF0000,
-            ),
+            embed=construct_extension_embed(self.bot, text="Reloaded Extensions."),
             mention_author=False,
         )
+
+    @reload.command(
+        description="Reload the bot.",
+        name="bot",
+        aliases=["b"],
+    )
+    @commands.is_owner()
+    async def _bot(self, ctx):
+        await ctx.reply("Reloading the bot!", mention_author=False)
+        await self.bot.close()
+        # and we would restart the bot from the outside!
 
 
 def setup(bot):
     bot.add_cog(Basic(bot))
+    bot.add_cog(Owner(bot))
