@@ -2,7 +2,7 @@
 # @Author: kapsikkum
 # @Date:   2021-02-27 15:07:03
 # @Last Modified by:   kapsikkum
-# @Last Modified time: 2021-04-09 13:47:45
+# @Last Modified time: 2021-04-10 00:48:53
 
 
 import asyncio
@@ -12,7 +12,8 @@ import logging
 import discord
 import motor.motor_asyncio
 from discord.ext import commands
-from meka.core.events import init_events
+
+# from meka.core.events import init_events
 from meka.core.utils import get_extensions, get_version
 
 log = logging.getLogger(__name__)
