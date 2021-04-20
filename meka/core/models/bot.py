@@ -2,7 +2,7 @@
 # @Author: kapsikkum
 # @Date:   2021-02-27 15:07:03
 # @Last Modified by:   kapsikkum
-# @Last Modified time: 2021-04-10 00:48:53
+# @Last Modified time: 2021-04-20 08:56:44
 
 
 import asyncio
@@ -76,7 +76,6 @@ class Bot(commands.AutoShardedBot):
     def reload_extensions(self):
         log.debug("Reloading all extensions")
         extensions = get_extensions()
-        extensions.insert(0, "meka.core.commands")
         for ext in extensions:
             try:
                 if ext in self.loaded_extensions:
