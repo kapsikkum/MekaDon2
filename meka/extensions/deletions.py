@@ -1,7 +1,7 @@
 # @Author: kapsikkum
 # @Date:   2021-04-20 08:53:13
 # @Last Modified by:   kapsikkum
-# @Last Modified time: 2021-04-20 09:08:28
+# @Last Modified time: 2021-05-12 13:52:43
 
 import os
 
@@ -118,7 +118,7 @@ class Cog(
                 except Exception as e:
                     pass
         else:
-            await ctx.reply("Nothing deleted.")
+            await ctx.reply("Nothing deleted.", mention_author=False)
 
 
 def setup(bot):

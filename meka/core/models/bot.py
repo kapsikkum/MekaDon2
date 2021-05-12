@@ -2,7 +2,7 @@
 # @Author: kapsikkum
 # @Date:   2021-02-27 15:07:03
 # @Last Modified by:   kapsikkum
-# @Last Modified time: 2021-04-20 08:56:44
+# @Last Modified time: 2021-05-12 13:59:53
 
 
 import asyncio
@@ -115,6 +115,11 @@ class Bot(commands.AutoShardedBot):
 
     async def on_message(self, message):
         await self.process_commands(message)
+
+    async def on_command_error(self, ctx, e):
+        if isinstance(e, commands.CommandNotFound):
+            return await ctx.message.add_reaction("⁉")
+        log.error(str(e))
 
     # run
     def run(self, *args, **kwargs):
