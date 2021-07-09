@@ -1,9 +1,10 @@
 # @Author: kapsikkum
 # @Date:   2021-04-02 07:35:02
 # @Last Modified by:   kapsikkum
-# @Last Modified time: 2021-04-20 08:54:20
+# @Last Modified time: 2021-07-09 14:56:54
 
 
+import discord
 from discord.ext import commands
 from meka.core.utils import construct_extension_embed
 
@@ -57,6 +58,18 @@ class Commands(
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def ping(self, ctx):
         await ctx.reply(f"**{int(self.bot.latency * 1000)} ms**", mention_author=False)
+
+    @commands.command(description="Get a link to invite the bot to your own server!")
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    async def invite(self, ctx):
+        await ctx.reply(
+            embed=discord.Embed(
+                title=discord.Embed.Empty,
+                description=f"[Click/tap here to invite me to your server!]({discord.utils.oauth_url(self.bot.user.id, permissions=discord.Permissions.all())})",
+                color=0xFF0000,
+            ),
+            mention_author=False,
+        )
 
 
 def setup(bot):
